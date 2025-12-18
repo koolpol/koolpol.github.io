@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Stress Relief Tools</title>
+    <style>
+        /* Very simple beginner styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f2ff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #0066cc;
+            text-align: center;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 10px;
+        }
+        
+        .tool {
+            background-color: #f0f8ff;
+            border: 2px solid #99ccff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        h2 {
+            color: #0066cc;
+            margin-top: 0;
+        }
+        
+        .counter-box {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        #counter {
+            font-size: 60px;
+            color: #ff6600;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .reset-btn {
+            background-color: #ff6600;
+        }
+        
+        .reset-btn:hover {
+            background-color: #e65c00;
+        }
+        
+        .breathing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .breath-step {
+            background-color: white;
+            border: 1px solid #99ccff;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .sound-box {
+            background-color: white;
+            border: 1px solid #99ccff;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .sound-title {
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            color: #666;
+        }
+        
+        /* Simple media query for mobile */
+        @media (max-width: 600px) {
+            .breathing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Stress Relief Tools</h1>
+        
+        <!-- Tool 1: Click Counter -->
+        <div class="tool">
+            <h2>Click Counter</h2>
+            <p>Click the button to count your clicks. It's satisfying!</p>
+            
+            <div class="counter-box">
+                <div>Current Count:</div>
+                <div id="counter">0</div>
+                <button onclick="addClick()">Click Here!</button>
+                <button class="reset-btn" onclick="resetCounter()">Reset</button>
+            </div>
+        </div>
+        
+        <!-- Tool 2: Breathing Exercise -->
+        <div class="tool">
+            <h2>Breathing Exercise</h2>
+            <p>Follow these steps to breathe calmly. Do this 3-5 times when stressed.</p>
+            
+            <div class="breathing-grid">
+                <div class="breath-step">
+                    <strong>Step 1</strong><br>
+                    Breathe In<br>
+                    4 seconds
+                </div>
+                <div class="breath-step">
+                    <strong>Step 2</strong><br>
+                    Hold<br>
+                    4 seconds
+                </div>
+                <div class="breath-step">
+                    <strong>Step 3</strong><br>
+                    Breathe Out<br>
+                    6 seconds
+                </div>
+                <div class="breath-step">
+                    <strong>Step 4</strong><br>
+                    Repeat<br>
+                    3-5 times
+                </div>
+            </div>
+            
+            <p><strong>Tip:</strong> Close your eyes and focus on your breathing.</p>
+        </div>
+        
+        <!-- Tool 3: Sound Players -->
+        <div class="tool">
+            <h2>Relaxing Sounds</h2>
+            <p>Listen to these calming sounds. Click play to start.</p>
+            <div class="sound-box">
+                <div class="sound-title"> A relaxing Song to Boost your day</div>
+                <p>Gentle rain to help you relax</p>
+                <audio controls style="width: 100%;">
+                    <source src="Rick-Roll-Sound-Effect.mp3.mp4" type="audio/mpeg">
+                    Your browser does not support audio.
+                </audio>
+            </div>
+            
+            <div class="sound-box">
+                <div class="sound-title">🌧️ Rain Sounds</div>
+                <p>Gentle rain to help you relax</p>
+                <audio controls style="width: 100%;">
+                    <source src="calming-rain-257596 2.mp3" type="audio/mpeg">
+                    Your browser does not support audio.
+                </audio>
+            </div>
+            
+            <div class="sound-box">
+                <div class="sound-title">Calming Winds</div>
+                <p>A breezy wind to calm you</p>
+                <audio controls style="width: 100%;">
+                    <source src="gentle-wind-gusts-447502.mp3" type="audio/mpeg">
+                    Your browser does not support audio.
+                </audio>
+            </div>
+            
+            <div class="sound-box">
+                <div class="sound-title">🔥 fire crackling sounds</div>
+                <p> This used to be a peaceful forest with birds</p>
+                <audio controls style="width: 100%;">
+                    <source src="fire-crackling-sounds-427410.mp3" type="audio/mpeg">
+                    Your browser does not support audio.
+                </audio>
+            </div>
+            
+            <p><strong>Note:</strong> You can only play one sound at a time.</p>
+        </div>
+        
+        <footer>
+            <p>Made with basic HTML, CSS, and a little JavaScript</p>
+            <p>Simple tools for stress relief</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simple JavaScript for click counter only
+        let clickCount = 0;
+        
+        function addClick() {
+            clickCount = clickCount + 1;
+            document.getElementById('counter').innerHTML = clickCount;
+        }
+        
+        function resetCounter() {
+            clickCount = 0;
+            document.getElementById('counter').innerHTML = clickCount;
+        }
+    </script>
+    <a href="progress.html">Our Progress Throughout Developing This Website<a>
+</body>
+</html>

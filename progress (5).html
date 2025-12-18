@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical to Horizontal Scroll Slideshow - Fixed</title>
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            /* We need extra height on the body to allow the vertical scroll to happen */
+            height: 700vh; /* Increased height to allow the scroll-timeline to work */
+        }
+
+        /* Helper class for initial content before the effect starts */
+        .scroll-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+        }
+
+        /* The main container for the horizontal effect */
+        .horizontal-scroll-wrapper {
+            height: 100vh;
+            /* This makes the wrapper stick in the viewport */
+            position: sticky;
+            top: 0;
+            overflow: hidden; /* Hides horizontal scrollbar */
+            background-color: white; /* Default background if images don't load */
+        }
+
+        /* --- CORRECTION 1 & 2 --- */
+        /* We have 6 slides. width is 600vw */
+        .horizontal-scroll-inner {
+            display: flex;
+            width: 600vw; /* 100vw * number of slides (6 slides = 600vw) */
+            height: 100%;
+            /* This is the key: vertical scroll position (root) drives horizontal translation (translateX) */
+            animation: scroll-translation linear forwards;
+            animation-timeline: scroll(root);
+        }
+
+        /* Define the animation for horizontal movement */
+        @keyframes scroll-translation {
+            /* Start at 0% scroll (top of the page section) -> translateX(0) */
+            /* --- CORRECTION 3 --- */
+            /* Move left by 5 full viewport widths (leaving the 6th slide visible). */
+            to {
+                transform: translateX(calc(-100vw * 5));
+            }
+        }
+
+        /* Individual slides within the inner container */
+        .slide {
+            width: 100vw; /* Each slide takes up one viewport width */
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0; /* Prevents slides from shrinking */
+            font-size: 2rem;
+            color: rgb(0, 0, 0);
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        /* CSS to make images work inside the slides */
+        .slide img {
+            max-width: 100%;   /* Ensures image stays within the slide width */
+            max-height: 100%;  /* Ensures image stays within the slide height */
+            object-fit: contain; /* Scales image nicely without stretching */
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Specific background colors for visual distinction (optional now that we have images) */
+        .slide:nth-child(1) { background-color: ghostwhite; }
+        .slide:nth-child(2) { background-color: gainsboro; }
+        .slide:nth-child(3) { background-color: lavenderblush; }
+        .slide:nth-child(4) { background-color: #e0f7fa; /* light cyan */ }
+        .slide:nth-child(5) { background-color: #ffecb3; /* light amber */ }
+        .slide:nth-child(6) { background-color: #d1c4e9; /* light purple */ }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Content before the horizontal scroll effect starts -->
+    <div class="scroll-section">
+        <h1>Scroll Down to Start the Horizontal Slideshow Effect</h1>
+    </div>
+
+    <!-- The main sticky container for the horizontal scroll -->
+    <div class="horizontal-scroll-wrapper">
+        <div class="horizontal-scroll-inner">
+            
+            <!-- Slide 1 with Image -->
+            <div class="slide">
+                <img src="Screenshot_2025-12-16_10.21.24_AM.png" alt="Image Slide 1">
+            </div>
+
+            <!-- Slide 2 with Image -->
+            <div class="slide">
+                <img src="Screenshot_2025-12-16_10.21.24_AM.png" alt="Image Slide 2">
+            </div>
+
+            <!-- Slide 3 with Image -->
+            <div class="slide">
+                <img src="Screenshot_2025-12-16_10.21.24_AM.png" alt="Image Slide 3">
+            </div>
+
+            <!-- Slide 4 with Image -->
+            <div class="slide">
+                <img src="Screenshot_2025-12-16_10.21.24_AM.png" alt="Image Slide 4">
+            </div>
+            
+            <!-- Slide 5 with Image -->
+            <div class="slide">
+                <img src="Screenshot_2025-12-16_10.21.24_AM.png" alt="Image Slide 5">
+            </div>
+
+            <!-- Slide 6 with Image -->
+            <div class="slide">
+                <img src="Screenshot_2025-12-16_10.21.24_AM.png" alt="Image Slide 6">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Content after the horizontal scroll effect ends -->
+    <div class="scroll-section">
+        <h1>Scroll Effect Finished! Content resumes below.</h1>
+    </div>
+
+</body>
+</html>
