@@ -1,1 +1,0 @@
-# koolpol.github.io
