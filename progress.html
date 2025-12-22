@@ -12,13 +12,14 @@
             /* We need extra height on the body to allow the vertical scroll to happen */
             height: 700vh; /* Increased height to allow the scroll-timeline to work */
             background-color: #000; /* Added background so the white glow is visible */
+            color: white; /* Default text color */
         }
 
         /* Renamed the selector to a class */
-        .glow-text { 
+        .glow-text {
             font-size: 48px; /* Adjust size as needed */
             color: #fff; /* Text color, typically white or matching the glow color */
-            text-align: center; 
+            text-align: center;
             /* Apply the animation */
             animation: glow 1.5s ease-in-out infinite alternate;
         }
@@ -40,16 +41,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* background-color: #f0f0f0; */ /* Removed light background for glow visibility */
-            color: #333;
             text-align: center;
         }
 
         /* Add styling for h3 to place it at the top */
         .top-heading {
             position: fixed; /* Fixes position relative to the viewport */
-            top: 0;          /* Aligns to the top edge */
-            width: 100%;     /* Spans the full width */
+            top: 0; /* Aligns to the top edge */
+            width: 100%; /* Spans the full width */
             text-align: center;
             padding: 10px 0;
             background-color: rgba(0, 0, 0, 0.7); /* Optional background for readability */
@@ -64,7 +63,39 @@
             position: sticky;
             top: 0;
             overflow: hidden; /* Hides horizontal scrollbar */
-            /* background-color: white; */ /* Removed for glow visibility */
+        }
+
+        /* !!! IMPORTANT: Added CSS for the inner container !!! */
+        .horizontal-scroll-inner {
+            display: flex; /* Allows slides to sit side-by-side */
+            height: 100%;
+            /* Will be animated via JavaScript */
+            will-change: transform; 
+        }
+
+        /* !!! IMPORTANT: Added CSS for individual slides !!! */
+        .slide {
+            width: 100vw; /* Each slide takes up the full viewport width */
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack h3 and img vertically */
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0; /* Prevents slides from shrinking */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            margin-top: 10px; /* Space between title and image */
+        }
+        
+        .ohio {
+            margin: 0;
+            font-size: 2em;
         }
     </style>
 </head>
@@ -73,14 +104,11 @@
     <!-- H3 text placed at the very top -->
     <h3 class="top-heading">This is the H3 text at the top</h3>
 
+    <!-- Content before the horizontal scroll effect starts -->
     <div class="scroll-section">
         <p class="glow-text">The Shining Effect is Now Working!</p>
     </div>
-
-    <!-- The rest of your existing structure can go here -->
-
-</body>
-    !-- Content before the horizontal scroll effect starts -->
+    
     <div class="scroll-section">
         <h1>Scroll Down to Start the Horizontal Slideshow Effect</h1>
     </div>
@@ -90,33 +118,33 @@
         <div class="horizontal-scroll-inner">
             <!-- Slide 1 with Image -->
             <div class="slide">
-                <h3 class="ohio">Welcome</h3> <!-- Added h3 for completeness -->
-                <img src="./Screenshot%202025-12-16%2010.21.24%20AM.png" alt="Slide image">
+                <h3 class="ohio">Welcome</h3>
+                <img src="./Screenshot%202025-12-16%2010.21.24%20AM.png" alt="Slide image 1">
             </div>
             <!-- Slide 2 with Image -->
             <div class="slide">
                 <h3 class="ohio">The Problem</h3>
-                <img src="IMG_0592 (1).JPG" alt="Slide image">
+                <img src="IMG_0592 (1).JPG" alt="Slide image 2">
             </div>
             <!-- Slide 3 with Image -->
             <div class="slide">
                 <h3 class="ohio">How we planned on solving it</h3>
-                <img src="IMG_0593 (1).JPG" alt="Slide image">
+                <img src="IMG_0593 (1).JPG" alt="Slide image 3">
             </div>
             <!-- Slide 4 with Image -->
             <div class="slide">
                 <h3 class="ohio">Creating The Soluion</h3>
-                <img src="IMG_0589 (2).JPG" alt="Slide image">
+                <img src="IMG_0589 (2).JPG" alt="Slide image 4">
             </div>
             <!-- Slide 5 with Image -->
             <div class="slide">
                 <h3 class="ohio">The Problems Faced</h3>
-                <img src="IMG_0591 (1).JPG" alt="Slide image">
+                <img src="IMG_0591 (1).JPG" alt="Slide image 5">
             </div>
             <!-- Slide 6 with Image -->
             <div class="slide">
                 <h3 class="ohio">Reflection</h3>
-                <img src="IMG_0594.JPG" alt="Slide image">
+                <img src="IMG_0594.JPG" alt="Slide image 6">
             </div>
         </div>
     </div>
@@ -125,4 +153,35 @@
     <div class="scroll-section">
         <h1>Scroll Effect Finished! Content resumes below.</h1>
     </div>
+
+    <!-- !!! IMPORTANT: Added JavaScript for the horizontal scroll animation !!! -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.querySelector('.horizontal-scroll-wrapper');
+            const inner = document.querySelector('.horizontal-scroll-inner');
+
+            // Calculate the total width to scroll based on the number of slides (6 in this case)
+            // It needs to be the width of all slides minus one viewport width (since the last slide sits at the end)
+            const totalWidth = inner.scrollWidth - window.innerWidth;
+            
+            // Link the vertical scroll position of the wrapper to the horizontal translation of the inner container
+            // This works by animating the 'transform' property of the inner element
+            // using the scroll progress of the wrapper as the input for the animation timeline.
+            inner.animate(
+                { transform: [`translateX(0)`, `translateX(-${totalWidth}px)`] },
+                {
+                    // The animation runs whenever the user scrolls past the 'start' point
+                    // which is when the top of the wrapper hits the top of the viewport (top top)
+                    // and ends when the bottom of the wrapper hits the bottom of the viewport (bottom bottom)
+                    timeline: new ViewTimeline({ subject: wrapper }),
+                    rangeStart: "top top",
+                    rangeEnd: "bottom bottom"
+                }
+            );
+        });
+    </script>
+
+</body>
 </html>
+
+
