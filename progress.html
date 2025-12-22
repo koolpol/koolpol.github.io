@@ -1,3 +1,8 @@
+‎progress.html‎
++25
+Lines changed: 25 additions & 0 deletions
+Original file line number	Diff line number	Diff line change
+@@ -1,143 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,29 +16,26 @@
             font-family: sans-serif;
             /* We need extra height on the body to allow the vertical scroll to happen */
             height: 700vh; /* Increased height to allow the scroll-timeline to work */
-            background-color: #000; /* Added background so the white glow is visible */
-            color: white; /* Default text color */
         }
+       .ohio { 
+    font-size: 48px; /* Adjust size as needed */
+    color: #fff; /* Text color, typically white or matching the glow color */
+    text-align: center; 
+    /* Apply the animation */
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
 
-        /* Renamed the selector to a class */
-        .glow-text {
-            font-size: 48px; /* Adjust size as needed */
-            color: #fff; /* Text color, typically white or matching the glow color */
-            text-align: center;
-            /* Apply the animation */
-            animation: glow 1.5s ease-in-out infinite alternate;
-        }
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #eee, 0 0 40px #fff;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #eee, 0 0 60px #fff, 0 0 70px #fff, 0 0 80px #fff;
+    }
+}
 
-        @keyframes glow {
-            from {
-                /* Starting state: a subtle glow with white shadows */
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #007bff, 0 0 40px #007bff;
-            }
-            to {
-                /* Ending state: a more intense glow with white shadows */
-                text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #007bff, 0 0 60px #007bff, 0 0 70px #007bff, 0 0 80px #007bff;
-            }
-        }
+/* ... rest of your CSS ... */
+
 
         /* Helper class for initial content before the effect starts */
         .scroll-section {
@@ -41,74 +43,79 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #f0f0f0;
+            color: #333;
             text-align: center;
-        }
-
-        /* Add styling for h3 to place it at the top */
-        .top-heading {
-            position: fixed; /* Fixes position relative to the viewport */
-            top: 0; /* Aligns to the top edge */
-            width: 100%; /* Spans the full width */
-            text-align: center;
-            padding: 10px 0;
-            background-color: rgba(0, 0, 0, 0.7); /* Optional background for readability */
-            color: white;
-            margin: 0;
-            z-index: 10; /* Ensures it's above other content */
         }
 
         /* The main container for the horizontal effect */
         .horizontal-scroll-wrapper {
-            height: 100vh; /* This makes the wrapper stick in the viewport */
+            height: 100vh;
+            /* This makes the wrapper stick in the viewport */
             position: sticky;
             top: 0;
             overflow: hidden; /* Hides horizontal scrollbar */
+            background-color: white; /* Default background if images don't load */
         }
 
-        /* !!! IMPORTANT: Added CSS for the inner container !!! */
+        /* --- CORRECTION 1 & 2 --- */
+        /* We have 6 slides. width is 600vw */
         .horizontal-scroll-inner {
-            display: flex; /* Allows slides to sit side-by-side */
+            display: flex;
+            width: 600vw; /* 100vw * number of slides (6 slides = 600vw) */
             height: 100%;
-            /* Will be animated via JavaScript */
-            will-change: transform; 
+            /* This is the key: vertical scroll position (root) drives horizontal translation (translateX) */
+            animation: scroll-translation linear forwards;
+            animation-timeline: scroll(root);
         }
 
-        /* !!! IMPORTANT: Added CSS for individual slides !!! */
+        /* Define the animation for horizontal movement */
+        @keyframes scroll-translation {
+            /* Start at 0% scroll (top of the page section) -> translateX(0) */
+            /* --- CORRECTION 3 --- */
+            /* Move left by 5 full viewport widths (leaving the 6th slide visible). */
+            to {
+                transform: translateX(calc(-100vw * 5));
+            }
+        }
+
+        /* Individual slides within the inner container */
         .slide {
-            width: 100vw; /* Each slide takes up the full viewport width */
-            height: 100vh;
+            width: 100vw; /* Each slide takes up one viewport width */
+            height: 100%;
             display: flex;
-            flex-direction: column; /* Stack h3 and img vertically */
             justify-content: center;
             align-items: center;
             flex-shrink: 0; /* Prevents slides from shrinking */
-            padding: 20px;
+            font-size: 2rem;
+            color: rgb(0, 0, 0);
             box-sizing: border-box;
+            padding: 20px;
         }
 
+        /* CSS to make images work inside the slides */
         .slide img {
-            max-width: 90%;
-            max-height: 80%;
-            object-fit: contain;
-            margin-top: 10px; /* Space between title and image */
+            max-width: 100%;   /* Ensures image stays within the slide width */
+            max-height: 100%;  /* Ensures image stays within the slide height */
+            object-fit: contain; /* Scales image nicely without stretching */
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        
-        .ohio {
-            margin: 0;
-            font-size: 2em;
-        }
+
+        /* Specific background colors for visual distinction (optional now that we have images) */
+        .slide:nth-child(1) { background-color: ghostwhite; }
+        .slide:nth-child(2) { background-color: gainsboro; }
+        .slide:nth-child(3) { background-color: lavenderblush; }
+        .slide:nth-child(4) { background-color: #e0f7fa; /* light cyan */ }
+        .slide:nth-child(5) { background-color: #ffecb3; /* light amber */ }
+        .slide:nth-child(6) { background-color: #d1c4e9; /* light purple */ }
+
     </style>
 </head>
 <body>
 
-    <!-- H3 text placed at the very top -->
-    <h3 class="top-heading">This is the H3 text at the top</h3>
-
     <!-- Content before the horizontal scroll effect starts -->
-    <div class="scroll-section">
-        <p class="glow-text">The Shining Effect is Now Working!</p>
-    </div>
-    
     <div class="scroll-section">
         <h1>Scroll Down to Start the Horizontal Slideshow Effect</h1>
     </div>
@@ -116,36 +123,43 @@
     <!-- The main sticky container for the horizontal scroll -->
     <div class="horizontal-scroll-wrapper">
         <div class="horizontal-scroll-inner">
+
             <!-- Slide 1 with Image -->
             <div class="slide">
-                <h3 class="ohio">Welcome</h3>
-                <img src="./Screenshot%202025-12-16%2010.21.24%20AM.png" alt="Slide image 1">
+            
+                <img src="./Screenshot%202025-12-16%2010.21.24%20AM.png" alt="Slide image">
             </div>
+
             <!-- Slide 2 with Image -->
             <div class="slide">
                 <h3 class="ohio">The Problem</h3>
-                <img src="IMG_0592 (1).JPG" alt="Slide image 2">
+                <img src="IMG_0592 (1).JPG" alt="Slide image">
             </div>
+
             <!-- Slide 3 with Image -->
             <div class="slide">
                 <h3 class="ohio">How we planned on solving it</h3>
-                <img src="IMG_0593 (1).JPG" alt="Slide image 3">
+                <img src="IMG_0593 (1).JPG" alt="Slide image">
             </div>
+
             <!-- Slide 4 with Image -->
             <div class="slide">
                 <h3 class="ohio">Creating The Soluion</h3>
-                <img src="IMG_0589 (2).JPG" alt="Slide image 4">
+                <img src="IMG_0589 (2).JPG" alt="Slide image">
             </div>
+
             <!-- Slide 5 with Image -->
             <div class="slide">
                 <h3 class="ohio">The Problems Faced</h3>
-                <img src="IMG_0591 (1).JPG" alt="Slide image 5">
+                <img src="IMG_0591 (1).JPG" alt="Slide image">
             </div>
+
             <!-- Slide 6 with Image -->
             <div class="slide">
                 <h3 class="ohio">Reflection</h3>
-                <img src="IMG_0594.JPG" alt="Slide image 6">
+                <img src="IMG_0594.JPG" alt="Slide image">
             </div>
+
         </div>
     </div>
 
@@ -154,34 +168,9 @@
         <h1>Scroll Effect Finished! Content resumes below.</h1>
     </div>
 
-    <!-- !!! IMPORTANT: Added JavaScript for the horizontal scroll animation !!! -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const wrapper = document.querySelector('.horizontal-scroll-wrapper');
-            const inner = document.querySelector('.horizontal-scroll-inner');
-
-            // Calculate the total width to scroll based on the number of slides (6 in this case)
-            // It needs to be the width of all slides minus one viewport width (since the last slide sits at the end)
-            const totalWidth = inner.scrollWidth - window.innerWidth;
-            
-            // Link the vertical scroll position of the wrapper to the horizontal translation of the inner container
-            // This works by animating the 'transform' property of the inner element
-            // using the scroll progress of the wrapper as the input for the animation timeline.
-            inner.animate(
-                { transform: [`translateX(0)`, `translateX(-${totalWidth}px)`] },
-                {
-                    // The animation runs whenever the user scrolls past the 'start' point
-                    // which is when the top of the wrapper hits the top of the viewport (top top)
-                    // and ends when the bottom of the wrapper hits the bottom of the viewport (bottom bottom)
-                    timeline: new ViewTimeline({ subject: wrapper }),
-                    rangeStart: "top top",
-                    rangeEnd: "bottom bottom"
-                }
-            );
-        });
-    </script>
-
 </body>
 </html>
 
-
+0 commit comments
+Comments
+0
