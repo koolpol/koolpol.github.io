@@ -12,6 +12,24 @@
             /* We need extra height on the body to allow the vertical scroll to happen */
             height: 700vh; /* Increased height to allow the scroll-timeline to work */
         }
+        ohio {
+    font-size: 48px; /* Adjust size as needed */
+    color: #fff; /* Text color, typically white or matching the glow color */
+    text-align: center;
+    /* Apply the animation */
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        /* Starting state: a subtle glow */
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #007bff, 0 0 40px #007bff;
+    }
+    to {
+        /* Ending state: a more intense glow */
+        text-shadow: 0 0 20px #fff, 0 0 30px #007bff, 0 0 40px #007bff, 0 0 50px #007bff, 0 0 60px #007bff, 0 0 70px #007bff, 0 0 80px #007bff;
+    }
+}
 
         /* Helper class for initial content before the effect starts */
         .scroll-section {
@@ -102,31 +120,37 @@
             
             <!-- Slide 1 with Image -->
             <div class="slide">
+            
                 <img src="./Screenshot%202025-12-16%2010.21.24%20AM.png" alt="Slide image">
             </div>
 
             <!-- Slide 2 with Image -->
             <div class="slide">
+                <h3 class="ohio">The Problem</h3>
                 <img src="IMG_0592 (1).JPG" alt="Slide image">
             </div>
 
             <!-- Slide 3 with Image -->
             <div class="slide">
+                <h3 class="ohio">How we planned on solving it</h3>
                 <img src="IMG_0593 (1).JPG" alt="Slide image">
             </div>
 
             <!-- Slide 4 with Image -->
             <div class="slide">
+                <h3 class="ohio">Creating The Soluion</h3>
                 <img src="IMG_0589 (2).JPG" alt="Slide image">
             </div>
             
             <!-- Slide 5 with Image -->
             <div class="slide">
+                <h3 class="ohio">The Problems Faced</h3>
                 <img src="IMG_0591 (1).JPG" alt="Slide image">
             </div>
 
             <!-- Slide 6 with Image -->
             <div class="slide">
+                <h3 class="ohio">Reflection</h3>
                 <img src="IMG_0594.JPG" alt="Slide image">
             </div>
 
@@ -140,4 +164,5 @@
 
 </body>
 </html>
+
 
