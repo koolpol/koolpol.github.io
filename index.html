@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stress Relief Hub - Home</title>
     <style>
-           .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 15px 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
+           <style>
+    /* ... existing CSS ... */
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        padding: 15px 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        height: 60px; /* Explicitly define the navbar height for accurate padding */
+    }
+
+ 
+
         .nav-container {
             max-width: 800px;
             margin: 0 auto;
@@ -133,8 +139,21 @@
             left: 0;
             color: #0ea5e9;
             font-size: 20px;
+            
         }
-    </style>
+           /* ... existing CSS ... */
+    
+    #header-section {
+        background-color: #ffffff;
+        padding: 30px 20px;
+        text-align: center;
+        /* Add top padding equal to the navbar height + desired extra space */
+        padding-top: 90px; /* (60px navbar height + 30px original padding) */
+    }
+
+    /* ... existing CSS ... */
+</style>
+    
     <!-- Tailwind CSS is included here, but the original code did not use Tailwind classes directly in the HTML markup. -->
     <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
 </head>
