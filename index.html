@@ -8,19 +8,17 @@
            <style>
     /* ... existing CSS ... */
 
-  .navbar {
-    position: sticky; /* Change from fixed to sticky */
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    padding: 15px 0;
-    z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
- 
-
+     .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
         .nav-container {
             max-width: 800px;
             margin: 0 auto;
@@ -56,6 +54,7 @@
         .nav-links a:hover {
             background: rgba(255, 255, 255, 0.1);
         }
+
         body {
             box-sizing: border-box;
         }
