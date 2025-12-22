@@ -13,37 +13,6 @@ body {
     height: 700vh; /* Increased height to allow the scroll-timeline to work */
 }
 
-/* --- NEW CSS FOR H3 POSITIONING --- */
-.slide {
-    /* ... existing slide styles ... */
-    position: relative; /* Crucial: This makes the slide the positioning context for its children */
-    overflow: hidden; /* Ensures text/image stays within boundaries if needed */
-}
-
-.ohio {
-    font-size: 48px; /* Adjust size as needed */
-    color: #fff; /* Text color, typically white or matching the glow color */
-    text-align: center;
-    /* Apply the animation */
-    animation: glow 1.5s ease-in-out infinite alternate;
-
-    /* --- Positioning styles --- */
-    position: absolute; /* Takes the h3 out of the normal flow */
-    top: 20px; /* Position from the top of the slide */
-    left: 0;
-    right: 0;
-    z-index: 10; /* Ensures the h3 is above the image */
-    margin: 0; /* Remove default margin */
-}
-/* ---------------------------------- */
-
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #eee, 0 0 40px #fff; }
-    to { text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #eee, 0 0 60px #fff, 0 0 70px #fff, 0 0 80px #fff; }
-}
-
-/* ... rest of your CSS ... */
 /* Helper class for initial content before the effect starts */
 .scroll-section {
     height: 100vh;
@@ -64,7 +33,6 @@ body {
     background-color: white; /* Default background if images don't load */
 }
 
-/* --- CORRECTION 1 & 2 --- */
 /* We have 6 slides. width is 600vw */
 .horizontal-scroll-inner {
     display: flex;
@@ -78,7 +46,6 @@ body {
 /* Define the animation for horizontal movement */
 @keyframes scroll-translation {
     /* Start at 0% scroll (top of the page section) -> translateX(0) */
-    /* --- CORRECTION 3 --- */
     /* Move left by 5 full viewport widths (leaving the 6th slide visible). */
     to { transform: translateX(calc(-100vw * 5)); }
 }
@@ -88,6 +55,7 @@ body {
     width: 100vw; /* Each slide takes up one viewport width */
     height: 100%; /* Important for image sizing */
     display: flex;
+    flex-direction: column; /* Stack h3 above image */
     justify-content: center;
     align-items: center;
     flex-shrink: 0; /* Prevents slides from shrinking */
@@ -95,16 +63,45 @@ body {
     color: rgb(0, 0, 0);
     box-sizing: border-box;
     padding: 20px; /* Added padding to prevent image touching edges, adjust as needed */
+    position: relative; /* For absolute positioning context if needed */
+}
+
+/* Style for the h3 heading */
+.ohio {
+    font-size: 48px; /* Adjust size as needed */
+    color: #fff; /* Text color, typically white or matching the glow color */
+    text-align: center;
+    /* Apply the animation */
+    animation: glow 1.5s ease-in-out infinite alternate;
+    margin: 0 0 30px 0; /* Space below the heading */
+    padding: 10px 20px;
+    z-index: 10; /* Ensures the h3 is above the image */
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #eee, 0 0 40px #fff; }
+    to { text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #eee, 0 0 60px #fff, 0 0 70px #fff, 0 0 80px #fff; }
+}
+
+/* Container for images to ensure consistent sizing */
+.image-container {
+    width: 80%; /* Adjust as needed - makes images responsive but consistent */
+    max-width: 800px; /* Maximum size for images */
+    height: 60vh; /* Consistent height for all images */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevents image overflow */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 /* CSS to make images work inside the slides */
 .slide img {
-    max-width: 100%; /* Ensures image stays within the slide width */
-    max-height: 100%; /* Ensures image stays within the slide height */
+    width: 100%; /* Fill the container width */
+    height: 100%; /* Fill the container height */
     object-fit: contain; /* Scales image nicely without stretching */
     display: block;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 /* Specific background colors for visual distinction (optional now that we have images) */
@@ -114,6 +111,18 @@ body {
 .slide:nth-child(4) { background-color: #e0f7fa; /* light cyan */ }
 .slide:nth-child(5) { background-color: #ffecb3; /* light amber */ }
 .slide:nth-child(6) { background-color: #d1c4e9; /* light purple */ }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ohio {
+        font-size: 32px; /* Smaller font for mobile */
+    }
+    
+    .image-container {
+        width: 90%; /* Slightly wider on mobile */
+        height: 50vh; /* Adjust height for mobile */
+    }
+}
 </style>
 </head>
 <body>
@@ -130,37 +139,49 @@ body {
         <!-- Slide 1 with Image and H3 -->
         <div class="slide">
             <h3 class="ohio">Starting Slide</h3>
-            <img src="./Screenshot%202025-12-16%2010.21.24%20AM.png" alt="Slide image">
+            <div class="image-container">
+                <img src="./Screenshot%202025-12-16%2010.21.24%20AM.png" alt="Slide image">
+            </div>
         </div>
 
         <!-- Slide 2 with Image and H3 -->
         <div class="slide">
             <h3 class="ohio">The Problem</h3>
-            <img src="IMG_0592 (1).JPG" alt="Slide image">
+            <div class="image-container">
+                <img src="IMG_0592 (1).JPG" alt="Slide image">
+            </div>
         </div>
 
         <!-- Slide 3 with Image and H3 -->
         <div class="slide">
             <h3 class="ohio">How we planned on solving it</h3>
-            <img src="IMG_0593 (1).JPG" alt="Slide image">
+            <div class="image-container">
+                <img src="IMG_0593 (1).JPG" alt="Slide image">
+            </div>
         </div>
 
         <!-- Slide 4 with Image and H3 -->
         <div class="slide">
             <h3 class="ohio">Creating The Solution</h3>
-            <img src="IMG_0589 (2).JPG" alt="Slide image">
+            <div class="image-container">
+                <img src="IMG_0589 (2).JPG" alt="Slide image">
+            </div>
         </div>
 
         <!-- Slide 5 with Image and H3 -->
         <div class="slide">
             <h3 class="ohio">The Problems Faced</h3>
-            <img src="IMG_0591 (1).JPG" alt="Slide image">
+            <div class="image-container">
+                <img src="IMG_0591 (1).JPG" alt="Slide image">
+            </div>
         </div>
 
         <!-- Slide 6 with Image and H3 -->
         <div class="slide">
             <h3 class="ohio">Reflection</h3>
-            <img src="IMG_0594.JPG" alt="Slide image">
+            <div class="image-container">
+                <img src="IMG_0594.JPG" alt="Slide image">
+            </div>
         </div>
 
     </div>
