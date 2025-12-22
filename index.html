@@ -193,21 +193,15 @@
             color: #666;
         }
         
-        /* ADDED: Full width sound section */
+        /* ADDED: Sound section fits to screen */
         #sound-section {
-            margin: 20px -20px;
-            padding: 15px 20px;
-            background-color: #f0f8ff;
-            border-left: none;
-            border-right: none;
-            border-radius: 0;
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 2px solid #99ccff;
-            border-left: none;
-            border-right: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        #sound-section audio {
+            width: 100%;
+            max-width: 100%;
         }
         
         /* Simple media query for mobile */
@@ -235,10 +229,19 @@
                 font-size: 20px;
             }
             
-            /* ADDED: Mobile adjustment for sound section */
+            /* ADDED: Mobile adjustments for sound section */
             #sound-section {
-                margin: 20px -10px;
-                padding: 15px 10px;
+                padding: 10px;
+            }
+            
+            #sound-section audio {
+                width: 100%;
+            }
+        }
+        
+        @media (min-width: 601px) and (max-width: 800px) {
+            #sound-section {
+                width: 100%;
             }
         }
     </style>
@@ -307,7 +310,7 @@
             </div>
         </div>
         
-        <!-- Tool 3: Sound Players - Now full width -->
+        <!-- Tool 3: Sound Players -->
         <div class="tool" id="sound-section">
             <h2>Relaxing Sounds</h2>
             <p>Listen to these calming sounds. Click play to start.</p>
